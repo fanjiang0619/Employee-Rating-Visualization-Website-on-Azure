@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <script src="Chart.js"></script>
+        <script src="Bar.js" ></script>
+    </head>
+    <script>
+    function company_click(){
+        var companyname = document.getElementById('chart-selector').value;
+        document.getElementById("touch")
+    }
+    </script>
+    <body>  
+        <div style="align-self:auto; display: flexbox; flex-direction: row; margin-left: 15%;">
+            <select id="chart-selector" name="chart-selector">
+                <option value="">Please Select An Option</option>
+                <option value="Google">Google</option>
+                <option value="Amazon">Amazon</option>
+                <option value="Facebook">Facebook</option>
+                <option value="Netflix">Netflix</option>
+                <option value="Apple">Apple</option>
+                <option value="Microsoft">Microsoft</option>
+            </select>
+            <div id="touch" onclick="company_click()"></div>
+        </div>
+        <div id="myChart" style="width: 75%; margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto;">
+            <canvas id="canvas"></canvas>
+        </div>
+        
+    </body>
+    <script>
+        var myBar;
+        document.getElementById('chart-selector').addEventListener("change", function(event) {
+            var selectedCompanyData = document.companyData[event.target.value];
+            if (myBar) {
+                myBar.destroy();
+            }
+            var ctx = document.getElementById("canvas");
+                // ctx.canvas.height = document.getElementById('canvas').clientHeight;
+                window.myBar = new Chart(ctx, {
+                type: "bar",
+                data: selectedCompanyData,
+                options: document.chartOptions
+            });
+        });
+    </script>
+</html>

@@ -1,0 +1,185 @@
+<!-- Reference: Hamburger menu: https://stackoverflow.com/questions/52356555/open-close-animated-hamburger-menu-when-clicking-button-->
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>
+            MM802 Mini Project
+        </title>
+        <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet"/> 
+        <link href="styles/main.css" rel="stylesheet"/>
+        <link href="styles/desktop.css" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/0.9.3/hamburgers.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <div class="logo-wrapper">
+                    <a href="index.html">
+                        <img class="logo" src="images/logo.png" />
+                    </a>
+                </div>
+                <div class="links-wrapper">
+                    <a href="https://www.kaggle.com/petersunga/google-amazon-facebook-employee-reviews/version/2">
+                        Our Dataset
+                    </a>
+                    <a href="https://www.glassdoor.ca/index.htm">
+                        Write Your Comment on Glassdoor
+                    </a>
+                </div>
+                <!-- Full Screen Navigation -->
+                <div id="primaryNav" class="hamburger-menu-wrapper">
+                    <nav>
+                    <!-- Spinning Hamburger Button -->
+                    <button class="hamburger hamburger--spin" type="button" aria-label="Menu" aria-controls="navigation"
+                            aria-expanded="false">
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </button>
+                
+                    <div id="popUpNav" class="overlay" onclick="closeNav()">
+                
+                        <div class="overlay-content">
+                            <a href="https://www.kaggle.com/petersunga/google-amazon-facebook-employee-reviews/version/2" data-scroll onclick="closeNav()">Dataset</a>
+                            <a href="https://www.glassdoor.ca/index.htm" data-scroll onclick="closeNav()">Glassdoor</a>
+                        </div>
+                    </div>
+                    </nav>
+                    <script>
+                    function openNav() {
+                    hamburger.classList.add("is-active");
+                    document.getElementById("popUpNav").style.display = "block";
+                    }
+                    
+                    function closeNav() {
+                    hamburger.classList.remove("is-active");
+                    document.getElementById("popUpNav").style.display = "none";
+                    }
+                    
+                    // Hamburger Menu Spin
+                    var hamburger = document.querySelector(".hamburger");
+                    
+                    hamburger.addEventListener('click', () => hamburger.classList.contains('is-active') ? closeNav() : openNav());
+                    
+                    closeNav();
+                </script>
+                </div><!--  End Primary Nav -->
+            </header>
+            <main>
+                <div class="hero">
+                    <div class="hero-content">
+                        <h1>Employee Review Analysis from Glassdoor</h1>
+                        <h2>Web scraped over 67k Employee Reviews for Google, Amazon, Apple, Microsoft, Facebook and Netflix</h2>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="our-story-link">
+                        Our Motivation
+                    </div>
+                    <div class="about-text">
+                            Google, Amazon, Apple, Microsoft, Facebook and Netflix are some of the big names we may think of when 
+                            we are looking for jobs. It is definitely exciting when you get an offer from them. However,
+                            it is also important to check what others say about these companies. As an employee evaluation
+                            system, Glassdoor does a great job on recording what the current and former employees rate their
+                            company. In this project, we used a web scraped dataset from Glassdoor, which contains over 50k 
+                            employee reviews from Google, Amazon, Apple, Microsoft, Facebook and Netflix. With our visuals, 
+                            you can have a better comparison between those companies. And hope these visuals can help you make 
+                            a brighter decision about where to launch you career!
+                    </div>
+                </div>
+                <div class="divider">
+                    <div class="deco-line"></div>
+                    Our Visuals
+                    <div class="deco-line"></div>
+                </div>
+                <div class="showcase-content">
+                    <div class="showcase-item"></div>
+                    <div class="showcase-item"></div>
+                    <div class="showcase-item"></div>
+                </div>
+                <div>
+                    <a class="showcase-link" href="Location_Bubble/index.html">
+                        # of Participants by Location
+                    </a>
+                    <a class="showcase-link" href="Status_Bar/Status_Bar.html">
+                        Rating Distr. by Employee Status 
+                    </a>
+                    <a class="showcase-link" href="Year_Pie/year_pie.html">
+                        Rating Change by Year
+                    </a>
+                </div>
+                
+                <div class="divider">
+                        <div class="deco-line"></div>
+                        Tools We Use
+                        <div class="deco-line"></div>
+                </div>
+                    <div class="jobs-intro">
+                        <div class="jobs-photos-wrapper">
+                            <div class="job-photo">
+                                <img src="images/photo1.jpg" />
+                            </div>
+                            <div class="job-photo">
+                                <img src="images/photo2.jpg" />
+                            </div>
+                            <div class="job-photo">
+                                <img src="images/photo3.jpg" />
+                            </div>
+                        </div>
+                        <div class="jobs-intro-links">
+                            <p>
+                                The tools we used to build these visuals include R Studio, JavaScript, CSS,
+                                and D3.js and Chart.js. We firstly downloaded our dataset from Kaggle. You can find our data
+                                source by clicking on "Our Dataset" button at the top of this page. Then, we used 
+                                R Studio to do data manipulation and saved the prepared data in ".csv" format. After
+                                that, we started to use D3.js and Chart.js to build our visuals. Some of our visuals are partially 
+                                built on the D3 visual templates imported from the official D3 GitHub Gallery. You can 
+                                find the D3 GitHub page by clicking on the button below. 
+                            </p>
+                            <button type="button">
+                                <a href="https://github.com/d3/d3/wiki/Gallery">
+                                    D3 Official GitHub
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="newsletter-wrapper">
+                        <div class="divider">
+                            <div class="deco-line"></div>
+                                Follow Us
+                            <div class="deco-line"></div>
+                        </div>
+                        <h2>
+                            Stay Tuned For Our Updates!
+                        </h2>
+                        <form class="newsletter-form">
+                            <input type="text" placeholder="youremail@here.com" />
+                            <input type="submit" value="submit" />
+                        </form>
+                        <div class="newsletter-thank-you hide">
+                            <h3>
+                                Thank you for subscribing!
+                            </h3>
+                        </div>
+                    </div>
+            </main>
+        </div>
+        <footer>
+
+        </footer>
+    </body>
+    <script>
+        document.querySelector('.newsletter-form input[type="submit"]')
+            .addEventListener('click',function(event) {
+                var userEmail=document.querySelector('.newsletter-form input[type="text"]').value;
+
+                document.querySelector('.newsletter-form').className='hide';
+                document.querySelector('.newsletter-thank-you').className='newsletter-thank-you';
+
+                document.querySelector('.newsletter-thank-you').innerHTML +=
+                    'We will send updates to ' + userEmail;
+                event.preventDefault();
+        });
+    </script>
+</html>

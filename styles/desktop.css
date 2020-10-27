@@ -1,0 +1,111 @@
+/*
+The following styles will only apply to desktop viewports
+larger than 768 wide.
+*/
+
+@media(min-width: 768px) {
+    .divider{
+        font-size: 20px;
+    }
+
+    .container {
+        max-width: 1000px;
+    }
+
+    .hero {
+        height: 650px;
+    }
+
+    .logo-wrapper {
+        text-align: left;
+    }
+
+    .hamburger-menu-wrapper {
+        display: none;
+    }
+
+    .links-wrapper {
+        display: block;
+    }
+
+    .content {
+        max-width: 800px;
+    }
+
+    .showcase-content {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .showcase-item {
+        width: 300px;
+        height: 400px;
+        margin: 0px;
+    }
+
+    .showcase-link {
+        font-size: 20px;
+        margin-top: auto;
+        margin-right: auto;
+    }
+    .showcase-link:nth-child(1) {
+        margin-left: 0%;
+    }
+    .showcase-link:nth-child(2) {
+        margin-left: 1%;
+    }
+    .showcase-link:nth-child(3) {
+        margin-left: 2%
+    }
+    .jobs-intro {
+        max-width: 900px;
+        flex-direction: row;
+    }
+
+    .jobs-intro-links {
+        text-align: left;
+        margin-left: 50px;
+        width: 400px;
+        margin-top: 0px;
+    }
+
+    .jobs-intro-links button {
+        margin-left: 0px;
+    }
+
+    .jobs-photos-wrapper {
+        display: grid;
+        grid-template-columns: 300px 150px;
+        grid-template-rows: 50% 50%;
+        height: 260px;
+        max-width: 450px;
+    }
+
+    .job-photo:not(:first-child) {
+        display: block;
+    }
+
+    .job-photo:not(:first-child) img {
+        max-height: 120px;
+    }
+
+    .job-photo img {
+        max-height: 260px;
+    }
+    
+    .job-photo:first-child {
+        grid-row: span 2;
+        width: 96%;
+    }
+    
+    .job-photo:last-child {
+        align-self: end;
+    }
+
+    .newsletter-wrapper form input[type="submit"] {
+        margin-top: 0px;
+    }
+}
+
+
+

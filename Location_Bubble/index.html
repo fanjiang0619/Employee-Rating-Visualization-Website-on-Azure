@@ -1,0 +1,203 @@
+<!-- Reference: Partial of the visual template is from: https://github.com/UsabilityEtc/d3-country-bubble-chart -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+		<title>Packed Bubble Chart</title>
+		<script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+
+		<style type="text/css">
+			/* No style rules here yet */		
+		</style>
+</head>
+<script>
+    function company_click(){
+        var companyname = document.getElementById('chart-selector').value;
+        document.getElementById("touch")
+    }
+</script>
+<body style="width: 1000px; align-content: center; margin: auto;">
+    <div>
+        <select id="chart-selector" name="chart-selector">
+            <option value="">Please Select An Option</option>
+            <option value="Google">Google</option>
+            <option value="Amazon">Amazon</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Netflix">Netflix</option>
+            <option value="Apple">Apple</option>
+            <option value="Microsoft">Microsoft</option>
+        </select>
+        <div id="touch" onclick="company_click()"></div>
+    </div>
+    <div style="width: 1500px; font-weight: bold; margin-left: auto; margin-right: auto; font-size: 40px; align-items: center">
+        Rating Participations' Location Distribution
+    </div>
+    <div style="width: 75%; margin-left:auto; margin-right:auto; margin-top:auto; margin-bottom:auto;">
+        <script type="text/javascript">
+
+            var amazonData = {
+                "children": [{"Name":"Seattle, WA","Count":4008},
+                    {"Name":"Bengaluru (India)","Count":1216},
+                    {"Name":"Hyderabad (India)","Count":1208},
+                    {"Name":"Chennai (India)","Count":656},
+                    {"Name":"London, England (UK)","Count":298},
+                    {"Name":"Phoenix, AZ","Count":222},
+                    {"Name":"San Bernardino, CA","Count":179},
+                    {"Name":"Pune (India)","Count":163},
+                    {"Name":"Moreno Valley, CA","Count":163},
+                    {"Name":"Baltimore, MD, CA","Count":145}]
+            };
+
+            var appleData = {
+                "children": [{"Name":"Cupertino, CA","Count":1275},
+                    {"Name":"New York, NY","Count":448},
+                    {"Name":"Austin, TX","Count":417},
+                    {"Name":"Cork (Ireland)","Count":215},
+                    {"Name":"San Francisco, CA","Count":181},
+                    {"Name":"London, England (UK)","Count":178},
+                    {"Name":"Los Angeles, CA","Count":138},
+                    {"Name":"Chicago, IL","Count":121},
+                    {"Name":"Atlanta, GA","Count":106},
+                    {"Name":"Singapore (Singapore)","Count":95}]
+            };
+
+            var facebookData = {
+                "children": [{"Name":"Menlo Park, CA","Count":802},
+                    {"Name":"Dublin, Co. Dublin (Ireland)","Count":112},
+                    {"Name":"London, England (UK)","Count":90},
+                    {"Name":"Seattle, WA","Count":86},
+                    {"Name":"Palo Alto, CA","Count":84},
+                    {"Name":"New York, NY","Count":84},
+                    {"Name":"San Francisco, CA","Count":49},
+                    {"Name":"Austin, TX","Count":44},
+                    {"Name":"Hyderabad (India)","Count":26},
+                    {"Name":"Singapore (Singapore)","Count":22}]
+            };
+
+            var googleData = {
+                "children": [{"Name":"Mountain View, CA","Count":1488},
+                    {"Name":"New York, NY","Count":344},
+                    {"Name":"Dublin, Co. Dublin (Ireland)","Count":310},
+                    {"Name":"San Francisco, CA","Count":204},
+                    {"Name":"London, England (UK)","Count":193},
+                    {"Name":"Hyderabad (India)","Count":175},
+                    {"Name":"Bengaluru (India)","Count":80},
+                    {"Name":"Los Angeles, CA","Count":70},
+                    {"Name":"Seattle, WA","Count":62},
+                    {"Name":"Gurgaon, Haryana (India)","Count":56}]
+            };
+
+            var microsoftData = {
+                "children": [{"Name":"Redmond, WA","Count":5602},
+                    {"Name":"Seattle, WA","Count":754},
+                    {"Name":"Bellevue, WA","Count":435},
+                    {"Name":"Hyderabad (India)","Count":431},
+                    {"Name":"Mountain View, CA","Count":206},
+                    {"Name":"Bengaluru (India)","Count":195},
+                    {"Name":"New York, NY","Count":142},
+                    {"Name":"London, England (UK)","Count":130},
+                    {"Name":"Dublin, Co. Dublin (Ireland)","Count":119},
+                    {"Name":"San Francisco, CA","Count":103}]
+            };
+
+            var netflixData = {
+                "children": [{"Name":"Los Gatos, CA","Count":244},
+                    {"Name":"Hillsboro, OR","Count":107},
+                    {"Name":"Salt Lake City, UT","Count":58},
+                    {"Name":"Los Angeles, CA","Count":27},
+                    {"Name":"Beverly Hills, CA","Count":21},
+                    {"Name":"Amsterdam (Netherlands)","Count":8},
+                    {"Name":"Portland, OR","Count":6},
+                    {"Name":"San Jose, CA","Count":6},
+                    {"Name":"Beaverton, OR)","Count":5},
+                    {"Name":"Fremont, CA","Count":5}]
+            };
+
+            document.companyData = {
+                "Google": googleData,
+                "Amazon": amazonData,
+                "Facebook": facebookData,
+                "Netflix": netflixData,
+                "Apple": appleData,
+                "Microsoft": microsoftData,
+            }
+
+            document.getElementById('chart-selector').addEventListener("change", function(event) {
+                var selectedCompanyData = document.companyData[event.target.value];
+            
+            d3.selectAll('svg').remove();
+
+
+            var diameter = 800;
+            var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+            var bubble = d3.pack(selectedCompanyData)
+                .size([diameter, diameter])
+                .padding(1.5);
+
+            var svg = d3.select("body")
+                .append("svg")
+                .attr("width", diameter)
+                .attr("height", diameter)
+                .attr("class", "bubble");
+
+            var nodes = d3.hierarchy(selectedCompanyData)
+                .sum(function(d) { return d.Count; });
+
+            var node = svg.selectAll(".node")
+                .data(bubble(nodes).descendants())
+                .enter()
+                .filter(function(d){
+                    return  !d.children
+                })
+                .append("g")
+                .attr("class", "node")
+                .attr("transform", function(d) {
+                    return "translate(" + d.x + "," + d.y + ")";
+                });
+
+            node.append("title")
+                .text(function(d) {
+                    return d.Name + ": " + d.Count;
+                });
+
+            node.append("circle")
+                .attr("r", function(d) {
+                    return d.r;
+                })
+                .style("fill", function(d,i) {
+                    return color(i);
+                });
+
+            node.append("text")
+                .attr("dy", ".2em")
+                .style("text-anchor", "middle")
+                .text(function(d) {
+                    return d.data.Name.substring(0, d.r / 3);
+                })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", function(d){
+                    return d.r/5;
+                })
+                .attr("fill", "white");
+
+            node.append("text")
+                .attr("dy", "1.3em")
+                .style("text-anchor", "middle")
+                .text(function(d) {
+                    return d.data.Count;
+                })
+                .attr("font-family",  "Gill Sans", "Gill Sans MT")
+                .attr("font-size", function(d){
+                    return d.r/5;
+                })
+                .attr("fill", "white");
+
+            d3.select(self.frameElement)
+                .style("height", diameter + "px");
+            });
+        </script>
+    </div>
+</body>
+</html>

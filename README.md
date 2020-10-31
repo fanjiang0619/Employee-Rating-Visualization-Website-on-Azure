@@ -1,4 +1,4 @@
-# Web Development for MM802 - Visualization Mini-project
+# Web Development Visualization
 
 For the finished website, please see `https://web101fanjiang.z13.web.core.windows.net/`
 
